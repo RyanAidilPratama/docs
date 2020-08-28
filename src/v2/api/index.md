@@ -3,7 +3,7 @@ title: API
 type: api
 ---
 
-## Global Config
+## Konfigurasi Global
 
 `Vue.config` adalah objek yang berisi konfigurasi global Vue. Anda dapat memodifikasi propertinya yang terdaftar di bawah ini sebelum mem-*bootstrap* aplikasi Anda:
 
@@ -51,16 +51,16 @@ type: api
 
 - **Tipe:** `boolean`
 
-- **Nilai Anggapan:** `true` (`false` pada build produksi)
+- **Nilai Anggapan:** `true` (`false` pada _build_ produksi)
 
 - **Penggunaan:**
 
   ``` js
-  // make sure to set this synchronously immediately after loading Vue
+  // pastikan untuk mengatur ini secara synchronous segera setelah memuat Vue
   Vue.config.devtools = true
   ```
 
-  Konfigurasi untuk mengizinkan [vue-devtools](https://github.com/vuejs/vue-devtools) inspeksi. Nilai anggapan dari opsi ini adalah `true` dalam build pengembangan. Dan` false` di build produksi. Anda dapat mengaturnya ke `true` untuk mengaktifkan inspeksi untuk produksi.
+  Konfigurasi untuk mengizinkan [vue-devtools](https://github.com/vuejs/vue-devtools) untuk melakukan inspeksi pada aplikasi kita. Nilai anggapan dari opsi ini adalah `true` dalam _build_ pengembangan dan `false` di _build_ produksi. Anda dapat mengaturnya ke `true` untuk mengaktifkan inspeksi pada produksi.
 
 ### errorHandler
 
@@ -78,21 +78,15 @@ type: api
   }
   ```
 
-  Tetapkan handler untuk kesalahan yang tidak tertangkap selama fungsi render komponen dan pengamat. Handler dipanggil dengan galat dan Vue instance.
+  Tetapkan _handler_ untuk kesalahan yang tidak tertangkap selama fungsi render komponen dan pengamat _(watcher)_. Fungsi _handler_ akan dipanggil dengan galat dan _instance_ Vue sebagai parameter.
 
-  > In 2.2.0+, this hook also captures errors in component lifecycle hooks. Also, when this hook is `undefined`, captured errors will be logged with `console.error` instead of crashing the app.
+  > Di 2.2.0+, kait ini juga menangkap galat pada kait siklus hidup komponen. Begitu juga ketika kait ini `undefined`, galat tetap akan dicatat dengan `console.error`, alih-alih membuat aplikasi menjadi tidak bisa digunakan.
 
-  > In 2.4.0+, this hook also captures errors thrown inside Vue custom event handlers.
+  > Di 2.4.0+, kait ini juga menangkap galat yang dilempar dari dalam _event handler_ khusus.
 
-  > In 2.6.0+, this hook also captures errors thrown inside `v-on` DOM listeners. In addition, if any of the covered hooks or handlers returns a Promise chain (e.g. async functions), the error from that Promise chain will also be handled.
+  > Di 2.6.0+, kait ini juga menangkap galat yang dilempar dari pemantau _(listener)_ DOM `v-on`. Sebagai tambahan, jika ada kait atau _handler_ yang mengembalikan rantai Promise (misalnya fungsi _async_), maka galat dari rantai Promise tersebut juga akan ditangani.
 
-  > Di 2.2.0+, kait ini juga menangkap kesalahan dalam kait siklus hidup komponen. Juga, ketika kait ini `undefined`, kesalahan yang ditangkap akan dicatat dengan` console.error` alih-alih merusak aplikasi.
-
-  > Di 2.4.0+, hook ini juga menangkap kesalahan yang dilemparkan di dalam *Vue custom event handlers*.
-
-  > Di 2.6.0+, kait ini juga menangkap kesalahan yang dilemparkan di dalam `v-on` DOM listener. Selain itu, jika ada kait atau handler yang mengembalikan rantai *Promise* (mis. Fungsi async), kesalahan dari rantai *Promise* itu juga akan ditangani.
-
-  > Servis pelacak galat [Sentry](https://sentry.io/for/vue/) dan [Bugsnag](https://docs.bugsnag.com/platforms/browsers/vue/) menyediakan intergasi resmi dengan opsi ini.
+  > Servis pelacak galat [Sentry](https://sentry.io/for/vue/) dan [Bugsnag](https://docs.bugsnag.com/platforms/browsers/vue/) menyediakan integrasi resmi dengan opsi ini.
 
 ### warnHandler
 
@@ -110,7 +104,7 @@ type: api
   }
   ```
 
-  Menetapkan handler khusus untuk peringatan pada *runtime Vue*. Perhatikan ini hanya berfungsi selama mode pengembangan dan diabaikan dalam produksi.
+  Menetapkan handler khusus untuk peringatan pada *runtime Vue*. Untuk catatan, ini hanya berfungsi selama mode pengembangan dan diabaikan dalam produksi.
 
 ### ignoredElements
 
@@ -146,7 +140,7 @@ type: api
     f1: 112,
     // camelCase tidak akan bekerja
     mediaPlayPause: 179,
-    // bandingkan menggunakan kebab-case dengan tanda kutip ganda
+    // tapi gunakan kebab-case dengan tanda kutip ganda
     "media-play-pause": 179,
     up: [38, 87]
   }
@@ -168,7 +162,7 @@ type: api
 
 - **Penggunaan**:
 
-  Setel ini menjadi `true` untuk mengaktifkan pelacakan inisialisasi komponen, kompilasi, render, dan palacakan performa patch pada browser devtool panel performance/timeline. Hanya berfungsi dalam mode pengembangan dan di browser yang mendukung [performance.mark] (https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark) API.
+  Setel ini menjadi `true` untuk mengaktifkan pelacakan inisialisasi komponen, kompilasi, render, dan palacakan performa patch pada alat pengembang peramban di bagian performance/timeline. Hanya berfungsi dalam mode pengembangan dan  peramban yang mendukung API [performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark).
 
 ### productionTip
 
@@ -182,7 +176,7 @@ type: api
 
   Setel ini menjadi `false` untuk mencegah tip produksi pada memulai Vue.
 
-## Global API
+## API Global
 
 ### Vue.extend( options )
 
@@ -259,7 +253,7 @@ type: api
   - `{string | number} key`
   - `{any} value`
 
-- **Returns:** set nilai.
+- **Mengembalikan:** nilai yang diset.
 
 - **Penggunaan:**
 
@@ -465,7 +459,7 @@ type: api
 
 - **Batasan:** Hanya menerima `Function` saat digunakan dalam pendefinisian komponen.
 
-- **Detail:**
+- **Detil:**
 
   Objek data pada sebuah Vue *instance*. Vue secara rekursif akan mengkonversi properti-propertinya menjadi *getter/setter* untuk membuatnya *reaktif*. **Objeknya haruslah sederhana**: objek-objek *native* seperti objek *browser* API and properti-properti *prototype* akan diabaikan. Aturan sederhananya adalah data seharusnya hanyalah data - tidak direkomendasikan untuk melakukan observasi ke objek-objek yang memiliki perilaku *stateful* (yang memiliki bermacam variasi keadaan / *state*).
 
@@ -511,7 +505,7 @@ type: api
 
 - **Tipe:** `Array<string> | Object`
 
-- **Detail:**
+- **Detil:**
 
   Sebuah daftar (*list*) /  *hash* dari attribut-attribut yang diekspos untuk menerima data dari komponen induk (*parent*). Props memiliki sebuah sintaks sederhana berbasis *Array* dan sintaks alternatif berbasis Objek yang memungkinkan konfigurasi lebih jauh (*advanced*) seperti pengecekan tipe (*type checking*), validasi khusus (*custom*) dan melakukan pemberian nilai-nilai standar (*default values*).
 
@@ -558,7 +552,7 @@ type: api
 
 - **Batasan:** hanya dapat ditemui / digunakan (*respected*) pada pembuatan *instance* via `new`.
 
-- **Detail:**
+- **Detil:**
 
   Meneruskan *props* ke *instance* saat pembuatan *instance* tersebut. Utamanya ditujukan agar pengerjaan *unit testing* lebih mudah.
 
@@ -581,7 +575,7 @@ type: api
 
 - **Tipe:** `{ [key: string]: Function | { get: Function, set: Function } }`
 
-- **Detail:**
+- **Detil:**
 
   Properti-properti terolah (*computed*) yang kemudian digabung kedalam Vue *instance*. Seluruh *getters* (fungsi untuk mengambil data) dan *setters* (fungsi untuk mengubah data) memiliki konteks `this` yang secara otomatis terikat dengan Vue *instance*-nya.
 
@@ -628,7 +622,7 @@ type: api
 
 - **Tipe:** `{ [key: string]: Function }`
 
-- **Detail:**
+- **Detil:**
 
   Metode-metode yang kemudian digabung ke dalam Vue *instance*. Kamu dapat mengakses metode-metode ini secara langsung pada VM *instance*, atau menggunakannya di ekspresi-ekspresi *directive*. Semua metode ini, konteks `this`-nya akan secara otomatis terikat ke Vue *instance*.
 
@@ -655,7 +649,7 @@ type: api
 
 - **Tipe:** `{ [key: string]: string | Function | Object | Array}`
 
-- **Detail:**
+- **Detil:**
 
   Sebuah objek dimana *keys* adalah expresi-expresi untuk memantau dan *values* adalah *callback*-nya (fungsi yang dipanggil setelah suatu fungsi lain selesai dieksekusi). *Value* dapat berupa *string* dari nama sebuah metode, atau sebuah Objek yang memiliki opsi-opsi tambahan. Vue *instance* akan memanggil `$watch()` setiap key pada objek saat instansiasi (pembuatan Vue *instance*).
 
@@ -717,7 +711,7 @@ type: api
 
 - **Batasan:** hanya berlaku pada pembuatan _instance_ melalui `new`.
 
-- **Detail:**
+- **Detil:**
 
   Berikan _instance_ Vue sebuah elemen DOM yang sudah ada untuk dipasangkan. Ini bisa berupa kata pemilih CSS atau sebuah HTMLElement sesungguhnya.
 
@@ -737,7 +731,7 @@ type: api
 
 - **Tipe:** `string`
 
-- **Detail:**
+- **Detil:**
 
   Templat string yang akan digunakan sebagai markup untuk _instance_ Vue. Template akan **menggantikan** elemen yang dipasang. Markup apa pun yang ada di dalam elemen yang dipasang akan diabaikan, kecuali jika slot distribusi konten ada dalam template.
 
@@ -755,7 +749,7 @@ type: api
 
   - **Tipe:** `(createElement: () => VNode) => VNode`
 
-  - **Detail:**
+  - **Detil:**
 
     Alternatif untuk templat string yang memungkinkan Anda memanfaatkan kekuatan penuh program JavaScript. Fungsi render menerima sebuah metode `createElement` sebagai argumen pertama yang digunakan untuk membuat `VNode`.
 
@@ -771,7 +765,7 @@ type: api
 
   - **Tipe:** `(createElement: () => VNode, error: Error) => VNode`
 
-  - **Detail:**
+  - **Detil:**
 
     **Hanya bekerja pada mode pengembangan.**
 
@@ -800,7 +794,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil secara sinkron segera setelah *instance* diinisialisasi, sebelum pengaturan data observasi dan *event/watcher*.
 
@@ -810,7 +804,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil secara sinkron setelah *instance* dibuat. Pada tahap ini, *instance* telah selesai memproses opsi yang berarti yang berikut telah diatur: data observasi, *computed properties*, *methods*, *watch/event callbacks*. Namun, tahap pemasangan belum dimulai, dan properti `$el` belum tersedia.
 
@@ -820,7 +814,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil tepat sebelum pemasangan dimulai: fungsi `render` akan dipanggil untuk pertama kalinya
 
@@ -832,7 +826,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil setelah *instance* telah terpasang, dimana `el` digantikan oleh `vm.$el` yang baru dibuat. Jika root instance sudah terpasang ke sebuah elemen pada dokumen, `vm.$el` juga akan di dokumen ketika `mounted` dipanggil.
 
@@ -856,7 +850,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil ketika data berubah sebelum DOM di-*patched*. Ini adalah tempat yang baik untuk mengakses DOM yang ada sebelum pembaruan, misalnya untuk menghapus *event listeners* yang ditambahkan secara manual.
 
@@ -868,7 +862,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil setelah perubahan data menyebabkan *virtual DOM*  diubah dan *patched*.
 
@@ -893,7 +887,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil ketika komponen *kept-alive* diaktifkan.
 
@@ -907,7 +901,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil ketika komponen *kept-alive* dinonaktifkan.
 
@@ -921,7 +915,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil tepat sebelum *instance* Vue dihancurkan. Pada tahap ini *instance* masih berfungsi penuh.
 
@@ -933,7 +927,7 @@ type: api
 
 - **Tipe:** `Function`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil setelah *instance* Vue dihancurkan. Ketika kait ini dipanggil, semua *directives* dari *instance* Vue *unbound*, semua *event listeners* telah dihapus, dan semua turunan *instance* Vue juga telah dihancurkan.
 
@@ -947,7 +941,7 @@ type: api
 
 - **Tipe:** `(err: Error, vm: Component, info: string) => ?boolean`
 
-- **Detail:**
+- **Detil:**
 
   Dipanggil ketika galat dari komponen turunan ditangkap. Kait menerima tiga argumen: Galatnya, *instance* komponen yang memicu galat, dan *string* yang memuat informasi dimana galat itu tertangkap. Kait dapat mengembalikan `false` untuk menghentikan galat agar tidak menyebar lebih lanjut.
 
@@ -969,7 +963,7 @@ type: api
 
 - **Tipe:** `Object`
 
-- **Detail:**
+- **Detil:**
 
   Sejumlah directive yang harus disediakan untuk _instance_ Vue.
 
@@ -979,7 +973,7 @@ type: api
 
 - **Tipe:** `Object`
 
-- **Detail:**
+- **Detil:**
 
   Sejumlah filter yang harus disediakan untuk _instance_ Vue.
 
@@ -989,19 +983,19 @@ type: api
 
 - **Tipe:** `Object`
 
-- **Detail:**
+- **Detil:**
 
   Sejumlah komponen yang harus disediakan untuk _instance_ Vue.
 
 - **Lihat juga:** [Components](../guide/components.html)
 
-## Options / Composition
+## Opsi / Composition
 
 ### parent
 
 - **Tipe:** `Vue instance`
 
-- **Detail:**
+- **Detil:**
 
   Tentukan _instance_ induk untuk _instance_ yang akan dibuat. Bangun hubungan induk-anak di antara keduanya. Induk dapat diakses sebagai`this.$parent` di dalam _instance_ anak, dan _instance_ anak akan dimasukkan ke dalem _array_ `$children` induknya.
 
@@ -1011,7 +1005,7 @@ type: api
 
 - **Tipe:** `Array<Object>`
 
-- **Detail:**
+- **Detil:**
 
   `mixins` menerima sebuah array berisi objek _mixin_. Kumpulan objek _mixin_ ini dapat berisi opsi _instance_ seperti _instance_ objek pada umumnya, dan mereka akan digabungkan dengan opsi yang ditambah menggunakan logika penggabungan opsi yang sama seperti `Vue.extend()`. Contoh: Jika `mixin` anda mengandung _hook_ dan komponen itu sendiri juga memiliki _hook_ yang sama, maka kedua fungsi akan dipanggil.
 
@@ -1037,7 +1031,7 @@ type: api
 
 - **Tipe:** `Object | Function`
 
-- **Detail:**
+- **Detil:**
 
   Secara deklaratif mengekstensi komponen lain (bisa antara objek opsi polos, atau sebuah konstruktor) tanpa menggunakan `Vue.extend`. Tujuan utama dari _extends_ adalah mempermudah ekstensi antara Komponen Berkas Tunggal.
 
@@ -1063,7 +1057,7 @@ type: api
   - **provide:** `Object | () => Object`
   - **inject:** `Array<string> | { [key: string]: string | Symbol | Object }`
 
-- **Detail:**
+- **Detil:**
 
   <p class="tip">`provide` dan `inject` khususnya disediakan untuk _plugin_ lanjutan / kasus pemakaian pustaka komponen. Fungsi ini TIDAK direkomendasikan untuk digunakan dalam kode aplikasi secara umum.</p>
 
@@ -1184,7 +1178,7 @@ type: api
   }
   ```
 
-## Options / Misc
+## Opsi / Lain-lain
 
 ### name
 
@@ -1192,7 +1186,7 @@ type: api
 
 - **Batasan:** Gunakan hanya sebagai opsi komponen.
 
-- **Detail:**
+- **Detil:**
 
   Mengizinkan sebuah komponen untuk memanggil dirinya sendiri di dalam templatnya sendiri secara rekursif. Catat bahwa ketika sebuah komponen terdaftar secara global dengan `Vue.component()`, ID global secara otomatis ditetapkan sebagai namanya.
 
@@ -1206,11 +1200,11 @@ type: api
 
 - **Batasan:** Opsi ini hanya tersedia di _full build_, dalam kompilasi peramban.
 
-- **Detail:**
+- **Detil:**
 
   Mengubah pembatas interpolasi teks normal.
 
-- **Example:**
+- **Contoh:**
 
   ``` js
   new Vue({
@@ -1224,7 +1218,7 @@ type: api
 
 - **Tipe:** `boolean`
 
-- **Detail:**
+- **Detil:**
 
   Menyebabkan sebuah komponen menjadi tanpa kondisi (tanpa `data`) dan tanpa _instance_ (tanpa konteks `this`). Komponen tersebut hanya berisi fungsi `render` yang mengembalikan node virtual agar membuat komponen tersebut lebih efektif untuk _dirender_.
 
@@ -1236,7 +1230,7 @@ type: api
 
 - **Tipe:** `{ prop?: string, event?: string }`
 
-- **Detail:**
+- **Detil:**
 
   Mengizinkan sebuah komponen khusus untuk menyesuaikan _prop_ dan _event_ ketika digunakan bersama `v-model`. Secara standar, `v-model` dalam sebuah komponen menggunakan `value` sebagai _prop_ dan `input` sebagai _event_, namun beberapa tipe _input_ seperti tombol centang dan tombol radio ingin menggunakan _prop_ `value` untuk tujuan yang lain. Menggunakan opsi `model` dapat menghindari konflik dalam kasus seperti ini.
 
@@ -1283,7 +1277,7 @@ type: api
 
 - **Nilai Anggapan:** `true`
 
-- **Detail:**
+- **Detil:**
 
   Secara standar, Ikatan atribut dalam cakupan induk yang tidak dikenali sebagai _prop_ akan "gagal" dan akan diaplikasikan ke elemen akar dari komponen anak sebagai atribut HTML normal. Ketika membuat sebuah komponen yang membungkus sebuah elemen target atau komponen lain, opsi ini tidak selalu menghasilkan hasil yang diinginkan. Dengan mengubah nilai `inheritAttrs` menjadi `false`, kejadian standar ini dapat dinonaktifkan. Atribut yang tersedia melalui properti _instance_ `$attrs` (baru di 2.4) dan bisa diikat secara eksplisit ke elemen yang bukan akar menggunakan `v-bind`.
 
@@ -1299,17 +1293,17 @@ type: api
 
 - **Batasan:** Opsi ini hanya tersedia di _full build_, dalam kompilasi peramban.
 
-- **Detail:**
+- **Detil:**
 
   Ketika nilai diubah ke `true`, akan menyimpan dan _merender_ komen HTML yang ditemukan di templat. Tindakan normal secara umum adalah dengan membuangnya.
 
-## Instance Properties
+## Properti Instance
 
 ### vm.$data
 
 - **Tipe:** `Object`
 
-- **Detail:**
+- **Detil:**
 
   Objek data yang dipantau oleh *Vue instance*. *Vue instance* menjembatani akses ke properti-properti yang ada di objek data *instance* tersebut.
 
@@ -1321,7 +1315,7 @@ type: api
 
 - **Tipe:** `Object`
 
-- **Detail:**
+- **Detil:**
 
   Sebuah objek yang merepresentasikan *props* terkini yang diterima sebuah komponen. *Vue instance* menjembatani akses ke properti-properti yang ada di objek *props* *instance* tersebut.
 
@@ -1331,7 +1325,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Elemen pangkal (root) DOM yang dikelola oleh *Vue instance*.
 
@@ -1341,7 +1335,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Opsi-opsi pembuatan (*instantiation*) yang digunakan untuk *Vue instance* tersebut. Properti ini berguna saat kamu ingin memasukkan properti khusus di dalam opsi:
 
@@ -1360,7 +1354,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   *Instance* induk (*parent*), jika *instance* tersebut mempunyainya.
 
@@ -1370,7 +1364,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   *Vue instance* pangkal (root) dari pohon komponen yang ada. Jika *instance* tersebut tidak mempunyai induk (*parent*), maka nilai dari properti ini adalah *instance* itu sendiri.
 
@@ -1380,7 +1374,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Komponen-komponen anakan (child) yang langsung berada dibawah *instance* tersebut. **Sebagai catatan, tidak ada jaminan akan urutan `$children`, dan mereka tidak bersifat reaktif.** Jika kamu ingin mencoba menggunakan `$children` untuk mengikat data (binding), pertimbangkan untuk menggunakan *Array* dan `v-for` untuk membuat (*generate*) komponen anakan (*child*), dan gunakan *Array* tersebut sebagai sumber validitas.
 
@@ -1390,7 +1384,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Digunakan untuk secara terprogram mengakses konten [yang didistribusi dengan slots](../guide/components.html#Content-Distribution-with-Slots). Tiap [slot yang memiliki nama (*named slot*)](../guide/components-slots.html#Slot-yang-Memiliki-Nama-Named-Slot) mempunyai properti terkait sendiri (misal: konten `slot="foo"` akan ditemukan pada `vm.$slots.foo`). Properti `default` berisi titik-titik (*nodes*) yang tidak masuk di dalam slot yang memiliki nama (*named slot*).
 
@@ -1442,7 +1436,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Digunakan untuk secara terprogram mengakses [scoped slots](../guide/components.html#Scoped-Slots). Tiap slot, termasuk `default`, objeknya memiliki fungsi terkait yang mengembalikan *VNodes*.
 
@@ -1465,7 +1459,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Sebuah objek dari elemen-elemen DOM dan *instances* komponen, didaftarkan dengan [attribut `ref`](#ref).
 
@@ -1479,7 +1473,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Menyatakan apakah *Vue instance* tersebut berjalan di server.
 
@@ -1493,7 +1487,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Berisi ikatan (bindings) attribut yang berada di cakupan induk (*parent*) (kecuali untuk `class` dan `style`) yang tidak dianggap (dan diekstrak) sebagai *props*. Saat sebuah komponen tidak memiliki deklarasi *props*, properti ini pada dasarnya berisi semua ikatan (bindings) yang berada di cakupan induk (*parent*) (kecuali untuk `class` dan `style`), dan dapat diteruskan kebawah ke komponen *inner* via `v-bind="$attrs"` - berguna saat membuat komponen *higher-order* (HOC).
 
@@ -1505,7 +1499,7 @@ type: api
 
 - **Hanya dapat dibaca**
 
-- **Detail:**
+- **Detil:**
 
   Berisi pemantau (*listeners*) *events* `v-on` yang berada di cakupan induk (parent) (tanpa pengubah (*modifiers*) `.native`). Properti ini dapat diteruskan kebawah ke komponen *inner* via `v-on="$listeners"` - berguna saat membuat komponen-komponen penyelubung (wrapper) yang bersifat transparan.
 
@@ -2462,7 +2456,7 @@ Digunakan untuk menunjukkan bahwa sebuah elemen `<template>` adalah *scoped slot
 
   Sama seperti [`slot-scope`](#slot-scope), hanya saja `scope` hanya bisa digunakan pada elemen `<template>`.
 
-## Built-In Components
+## Komponen Built-In
 
 ### component
 
@@ -2472,27 +2466,27 @@ Digunakan untuk menunjukkan bahwa sebuah elemen `<template>` adalah *scoped slot
 
 - **Penggunaan:**
 
-  A "meta component" for rendering dynamic components. The actual component to render is determined by the `is` prop:
+  "Komponen meta" untuk merender komponen dinamis. Komponen yang sesungguhnya yang di-render ditentukan oleh prop `is`:
 
   ```html
-  <!-- a dynamic component controlled by -->
-  <!-- the `componentId` property on the vm -->
+  <!-- komponen dinamis dikendalikan oleh -->
+  <!-- properti `componentId` dalam vm -->
   <component :is="componentId"></component>
 
-  <!-- can also render registered component or component passed as prop -->
+  <!-- dapat pula merender komponen yang telah didaftarkan atau komponen dioper sebagai prop -->
   <component :is="$options.components.child"></component>
   ```
 
-- **Lihat juga:** [Dynamic Components](../guide/components.html#Dynamic-Components)
+- **Lihat juga:** [Komponen Dinamis](../guide/components.html#Dynamic-Components)
 
 ### transition
 
 - **Props:**
-  - `name` - string, Used to automatically generate transition CSS class names. e.g. `name: 'fade'` will auto expand to `.fade-enter`, `.fade-enter-active`, etc. Defaults to `"v"`.
-  - `appear` - boolean, Whether to apply transition on initial render. Defaults to `false`.
-  - `css` - boolean, Whether to apply CSS transition classes. Defaults to `true`. If set to `false`, will only trigger JavaScript hooks registered via component events.
-  - `type` - string, Specify the type of transition events to wait for to determine transition end timing. Available values are `"transition"` and `"animation"`. By default, it will automatically detect the type that has a longer duration.
-  - `mode` - string, Controls the timing sequence of leaving/entering transitions. Available modes are `"out-in"` and `"in-out"`; defaults to simultaneous.
+  - `name` - string, Digunakan untuk menghasilkan nama kelas CSS transisi secara otomatis. Sebagai contoh `name: 'fade'` akan otomatis _expand_ ke `.fade-enter`, `.fade-enter-active`, dan lain-lain. Nilai bawaan `"v"`.
+  - `appear` - boolean, Apakah akan menerapkan transisi dalam render awal. Nilai bawaan `false`.
+  - `css` - boolean, Apakah akan menerapkan _class_ transisi CSS. Nilai bawaan `true`. Jika diatur menjadi `false`, hanya akan memicu _hook_ Javascript teregistrasi via _event_ komponen.
+  - `type` - string, Menentukan tipe _event_ transisi untuk menunggu untuk memastikan waktu akhir transisi. Nilai yang tersedia adalah `"transition"` dan `"animation"`. Secara bawaan, ini akan secara otomatis mendeteksi tipe yang memiliki durasi lebih lama.
+  - `mode` - string, Mengontrol urutan waktu dari transisi pergi/masuk. Mode yang tersedia adalah `"out-in"` dan `"in-out"`; nilai bawaan serentak.
   - `enter-class` - string
   - `leave-class` - string
   - `appear-class` - string
@@ -2519,20 +2513,20 @@ Digunakan untuk menunjukkan bahwa sebuah elemen `<template>` adalah *scoped slot
 
 - **Penggunaan:**
 
-  `<transition>` serve as transition effects for **single** element/component. The `<transition>` only applies the transition behavior to the wrapped content inside; it doesn't render an extra DOM element, or show up in the inspected component hierarchy.
+  `<transition>` disajikan sebagai efek transisi untuk elemen/komponen **tunggal**. `<transition>` hanya menerapkan tingkah laku transisi untuk konten yang terbungkus di dalam; ini tidak merender elemen DOM tambahan, atau ditampilkan dalam hirarki komponen yang terinspeksi.
 
   ```html
-  <!-- simple element -->
+  <!-- elemen sedehana -->
   <transition>
     <div v-if="ok">toggled content</div>
   </transition>
 
-  <!-- dynamic component -->
+  <!-- komponen dinamis -->
   <transition name="fade" mode="out-in" appear>
     <component :is="view"></component>
   </transition>
 
-  <!-- event hooking -->
+  <!-- pengait event -->
   <div id="transition-demo">
     <transition @after-enter="transitionComplete">
       <div v-show="ok">toggled content</div>
@@ -2552,25 +2546,25 @@ Digunakan untuk menunjukkan bahwa sebuah elemen `<template>` adalah *scoped slot
   }).$mount('#transition-demo')
   ```
 
-- **Lihat juga:** [Transitions: Entering, Leaving, and Lists](../guide/transitions.html)
+- **Lihat juga:** [Transisi: Masuk, Pergi, dan Daftar Transisi lainnya](../guide/transitions.html)
 
 ### transition-group
 
 - **Props:**
-  - `tag` - string, defaults to `span`.
-  - `move-class` - overwrite CSS class applied during moving transition.
-  - exposes the same props as `<transition>` except `mode`.
+  - `tag` - string, nilai bawaan `span`.
+  - `move-class` - menimpa _class_ CSS yand diterapkan selama transisi berjalan.
+  - membuka _prop_ yang sama sebagai `<transition>` kecuali `mode`.
 
 - **Events:**
-  - exposes the same events as `<transition>`.
+  - membuka _event_ yang sama sebagai `<transition>`.
 
 - **Penggunaan:**
 
-  `<transition-group>` serve as transition effects for **multiple** elements/components. The `<transition-group>` renders a real DOM element. By default it renders a `<span>`, and you can configure what element it should render via the `tag` attribute.
+  `<transition-group>` disajikan sebagai efek transisi untuk elemen/komponen **berganda**. `<transition-group>` merender elemen DOM yang sebenarnya. Sebagai bawaan ini menernder `<span>`. dan Anda dapat mengkonfigurasi elemen apa yang harus dirender melalui atribut `tag`.
 
-  Note every child in a `<transition-group>` must be **uniquely keyed** for the animations to work properly.
+  Catatan setiap _child_ dalam `<transition-group>` harus memiliki **kunci yang unik** agar animasi bekerja dengan baik.
 
-  `<transition-group>` supports moving transitions via CSS transform. When a child's position on screen has changed after an update, it will get applied a moving CSS class (auto generated from the `name` attribute or configured with the `move-class` attribute). If the CSS `transform` property is "transition-able" when the moving class is applied, the element will be smoothly animated to its destination using the [FLIP technique](https://aerotwist.com/blog/flip-your-animations/).
+  `<transition-group>` mendukung transisi berjalan melalui transform CSS. Ketika posisi sebuah _child_ dalam layar berganti setekah pembaruan, ini akan menerapkan _class_ CSS berjalan (otomatis dihasilkan dari atribut `name` atau terkonfigurasi dengan atribut `move-class`). Jika properti `transform` CSS adalah "transition-able" ketika _class_ berjalan diterapkan, elemen akan teranimasi dengan lancar ke destinasi menggunakan [teknik FLIP](https://aerotwist.com/blog/flip-your-animations/).
 
   ```html
   <transition-group tag="ul" name="slide">
@@ -2580,38 +2574,38 @@ Digunakan untuk menunjukkan bahwa sebuah elemen `<template>` adalah *scoped slot
   </transition-group>
   ```
 
-- **Lihat juga:** [Transitions: Entering, Leaving, and Lists](../guide/transitions.html)
+- **Lihat juga:** [Transisi: Masuk, Pergi, dan Daftar Transisi lainnya](../guide/transitions.html)
 
 ### keep-alive
 
 - **Props:**
-  - `include` - string or RegExp or Array. Only components with matching names will be cached.
-  - `exclude` - string or RegExp or Array. Any component with a matching name will not be cached.
-  - `max` - number. The maximum number of component instances to cache.
+  - `include` - string atau RegExp atau Array. Hanya komponen dengan nama yang cocok akan dimasukan _cache_.
+  - `exclude` - string atau RegExp atau Array. Komponen apapun dengan nama yang cocok tidak akan dimasukan _cache_.
+  - `max` - number. Angka maksimum dari instan komponen yang dapat masuk ke daam _cache_.
 
 - **Penggunaan:**
 
-  When wrapped around a dynamic component, `<keep-alive>` caches the inactive component instances without destroying them. Similar to `<transition>`, `<keep-alive>` is an abstract component: it doesn't render a DOM element itself, and doesn't show up in the component parent chain.
+  Kerika membungkus komponen dinamis, _cache_ `<keep-alive` instan komponen tidak aktif tanpa menghancurkannya. Seperti `<transition>`, `<keep-alive>` adalah komponen abstrak: tidak merender elemen DOM sendiri, dan tidak tampil dalam rantai komponen _parent_.
 
-  When a component is toggled inside `<keep-alive>`, its `activated` and `deactivated` lifecycle hooks will be invoked accordingly.
+  Ketika komponen diaktifkan dalam `<keep-alive>`, kait siklus hidup `activated` dan `deactivated` akan diminta sesuai.
 
-  > In 2.2.0+ and above, `activated` and `deactivated` will fire for all nested components inside a `<keep-alive>` tree.
+  > Dalam 2.2.0+ ke atas, `activated` dan `deactivated` akan menyala untuk semua komponen bersarang di dalam pohon `<keep-alive>`.
 
-  Primarily used to preserve component state or avoid re-rendering.
+  Terutama digunakan untuk mempertahankan _state_ komponen atau menghindari merender ulang.
 
   ```html
-  <!-- basic -->
+  <!-- dasar -->
   <keep-alive>
     <component :is="view"></component>
   </keep-alive>
 
-  <!-- multiple conditional children -->
+  <!-- kondisional _children_ berganda -->
   <keep-alive>
     <comp-a v-if="a > 1"></comp-a>
     <comp-b v-else></comp-b>
   </keep-alive>
 
-  <!-- used together with `<transition>` -->
+  <!-- digunakan bersama dengan `<transition>` -->
   <transition>
     <keep-alive>
       <component :is="view"></component>
@@ -2619,13 +2613,13 @@ Digunakan untuk menunjukkan bahwa sebuah elemen `<template>` adalah *scoped slot
   </transition>
   ```
 
-  Note, `<keep-alive>` is designed for the case where it has one direct child component that is being toggled. It does not work if you have `v-for` inside it. When there are multiple conditional children, as above, `<keep-alive>` requires that only one child is rendered at a time.
+  Catatan, `<keep-alive>` didesain untuk kasus dimana komponen memiliki satu komponen _child_ yang sedang diaktifkan. Ini tidak bekerja jika Anda memiliki `v-for` di dalamnya. Ketika disana terdapat kondisional _children_ berganda, sebagaimana di atas, `<keep-alive>` memerlukan hanya satu _child_ dirender dalam satu waktu.
 
 - **`include` and `exclude`**
 
-  > New in 2.1.0+
+  > Baru di 2.1.0+
 
-  The `include` and `exclude` props allow components to be conditionally cached. Both props can be a comma-delimited string, a RegExp or an Array:
+  _Prop_ `include` dan `exclude` mengijinkan komponen untuk secara kondisional dimasukan ke daam _cache_. Semua _prop_ dapat menjadi string _comma-delimited_, sebuah RegExp atau Array:
 
   ``` html
   <!-- comma-delimited string -->
@@ -2633,24 +2627,24 @@ Digunakan untuk menunjukkan bahwa sebuah elemen `<template>` adalah *scoped slot
     <component :is="view"></component>
   </keep-alive>
 
-  <!-- regex (use `v-bind`) -->
+  <!-- regex (gunakan `v-bind`) -->
   <keep-alive :include="/a|b/">
     <component :is="view"></component>
   </keep-alive>
 
-  <!-- Array (use `v-bind`) -->
+  <!-- Array (gunakan `v-bind`) -->
   <keep-alive :include="['a', 'b']">
     <component :is="view"></component>
   </keep-alive>
   ```
 
-  The match is first checked on the component's own `name` option, then its local registration name (the key in the parent's `components` option) if the `name` option is not available. Anonymous components cannot be matched against.
+  Kecocokan adalah yang pertama kali diperiksa pada opsi `name` komponen itu sendiri, lalu nama registrasi lokal (kunci dalam opsi komponen _parent_) jika opsi `name` tidak tersedia. Komponen anonim tidak dapat dicocokan.
 
 - **`max`**
 
   > New in 2.5.0+
 
-  The maximum number of component instances to cache. Once this number is reached, the cached component instance that was least recently accessed will be destroyed before creating a new instance.
+  Angka maksimum dari instan komponen untuk dimasukan ke dalam _cache_. Saat angka ini tercapai, instan komponen dalam _cache_ yang paling sedikit diakses akan dihancurkan sebelum membuat instan baru.
 
   ``` html
   <keep-alive :max="10">
@@ -2658,22 +2652,22 @@ Digunakan untuk menunjukkan bahwa sebuah elemen `<template>` adalah *scoped slot
   </keep-alive>
   ```
 
-  <p class="tip">`<keep-alive>` does not work with functional components because they do not have instances to be cached.</p>
+  <p class="tip">`<keep-alive>` tidak bekerja dengan komponen fungsional karena mereka tidak memiliki instan untuk dimasukan ke dalam _cache_.</p>
 
-- **Lihat juga:** [Dynamic Components - keep-alive](../guide/components.html#keep-alive)
+- **Lihat juga:** [Komponen Dinamis - keep-alive](../guide/components.html#keep-alive)
 
 ### slot
 
 - **Props:**
-  - `name` - string, Used for named slot.
+  - `name` - string, Digunakan untuk menamai slot.
 
 - **Penggunaan:**
 
-  `<slot>` serve as content distribution outlets in component templates. `<slot>` itself will be replaced.
+  `<slot>` disajikan sebagai outlet distribusi konten dalam templat komponen. `<slot>` sendiri akan digantikan.
 
-  For detailed usage, see the guide section linked below.
+  Untuk detil penggunaan, lihat bagian petunjuk tautan di bawah.
 
-- **Lihat juga:** [Content Distribution with Slots](../guide/components.html#Content-Distribution-with-Slots)
+- **Lihat juga:** [Distribusi konten dengan Slot](../guide/components.html#Content-Distribution-with-Slots)
 
 ## VNode Interface
 
